@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: picoclaw
+    runtime: docker
+    dockerfilePath: ./docker/Dockerfile
+    envVars:
+      - key: TZ
+        value: America/New_York
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: DISCORD_BOT_TOKEN
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+    healthCheckPath: /health
+    healthCheckPort: 18790
