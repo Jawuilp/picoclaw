@@ -28,17 +28,18 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 
 # Copy binary and config
 COPY --from=builder /src/build/picoclaw /usr/local/bin/picoclaw
-COPY --from=builder /src/config.json /home/picoclaw/.picoclaw/config.json
+COPY --from=builder /src/config.json /tmp/config.json
 
 # Create non-root user and group
 RUN addgroup -g 1000 picoclaw && \
-    adduser -D -u 1000 -G picoclaw picoclaw
+    adduser -D -u 1000 -G picoclaw picoclaw && \
+    mkdir -p /home/picoclaw/.picoclaw && \
+    cp /tmp/config.json /home/picoclaw/.picoclaw/config.json && \
+    mkdir -p /home/picoclaw/.picoclaw/workspace && \
+    chown -R picoclaw:picoclaw /home/picoclaw
 
 # Switch to non-root user
 USER picoclaw
-
-# Run onboard to create initial directories and config
-RUN /usr/local/bin/picoclaw onboard
 
 ENTRYPOINT ["picoclaw"]
 CMD ["gateway"]
