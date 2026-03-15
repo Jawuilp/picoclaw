@@ -2,7 +2,7 @@ services:
   - type: web
     name: picoclaw
     runtime: docker
-    dockerfilePath: ./docker/Dockerfile
+    dockerfilePath: ./Dockerfile
     envVars:
       - key: TZ
         value: America/New_York
