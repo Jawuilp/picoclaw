@@ -62,5 +62,11 @@ func (h *Handler) buildWsURL(r *http.Request, cfg *config.Config) string {
 	if host == "" || host == "0.0.0.0" {
 		host = requestHostName(r)
 	}
-	return "ws://" + net.JoinHostPort(host, strconv.Itoa(cfg.Gateway.Port)) + "/pico/ws"
+	
+	scheme := "ws"
+	if r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https" {
+		scheme = "wss"
+	}
+	
+	return scheme + "://" + net.JoinHostPort(host, strconv.Itoa(cfg.Gateway.Port)) + "/pico/ws"
 }
