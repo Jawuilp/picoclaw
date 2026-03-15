@@ -3,9 +3,12 @@
 # ============================================================
 FROM golang:1.25-alpine AS builder
 
-RUN apk add --no-cache git make
+RUN apk add --no-cache git make nodejs npm
 
 WORKDIR /src
+
+# Install pnpm globally
+RUN npm install -g pnpm
 
 # Cache dependencies
 COPY go.mod go.sum ./
