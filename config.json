@@ -10,5 +10,11 @@
       "model": "openrouter/free",
       "api_base": "https://openrouter.ai/api/v1"
     }
-  ]
+  ],
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "allow_from": []
+    }
+  }
 }
