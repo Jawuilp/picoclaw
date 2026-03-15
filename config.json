@@ -1,0 +1,14 @@
+{
+  "agents": {
+    "defaults": {
+      "model": "openrouter-free"
+    }
+  },
+  "model_list": [
+    {
+      "model_name": "openrouter-free",
+      "model": "openrouter/free",
+      "api_base": "https://openrouter.ai/api/v1"
+    }
+  ]
+}

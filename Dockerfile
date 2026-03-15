@@ -26,8 +26,9 @@ RUN apk add --no-cache ca-certificates tzdata curl
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget -q --spider http://localhost:18790/health || exit 1
 
-# Copy binary
+# Copy binary and config
 COPY --from=builder /src/build/picoclaw /usr/local/bin/picoclaw
+COPY --from=builder /src/config.json /home/picoclaw/.picoclaw/config.json
 
 # Create non-root user and group
 RUN addgroup -g 1000 picoclaw && \
