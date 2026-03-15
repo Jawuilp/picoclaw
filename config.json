@@ -12,8 +12,9 @@
     }
   ],
   "channels": {
-    "telegram": {
+    "pico": {
       "enabled": true,
+      "token": "dev-token-12345",
       "allow_from": []
     }
   }
