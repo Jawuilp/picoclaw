@@ -47,4 +47,4 @@ RUN addgroup -g 1000 picoclaw && \
 # Switch to non-root user
 USER picoclaw
 
-ENTRYPOINT ["/usr/local/bin/picoclaw-web", "-public", "-port", "${PORT:-18800}"]
+ENTRYPOINT ["/usr/local/bin/picoclaw-web", "-public", "-port", "18800"]

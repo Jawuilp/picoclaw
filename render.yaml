@@ -7,8 +7,6 @@ services:
     envVars:
       - key: TZ
         value: America/New_York
-      - key: PORT
-        value: "18800"
       - key: OPENROUTER_API_KEY
         sync: false
       - key: TELEGRAM_BOT_TOKEN
