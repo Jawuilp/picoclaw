@@ -29,6 +29,8 @@ RUN apk add --no-cache ca-certificates tzdata curl
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD wget -q --spider http://localhost:18800/health || exit 1
 
+EXPOSE 18800
+
 # Copy binary (web launcher) and CLI, and config
 COPY --from=builder /src/build/picoclaw-launcher /usr/local/bin/picoclaw-web
 COPY --from=builder /src/build/picoclaw /usr/local/bin/picoclaw
@@ -45,4 +47,4 @@ RUN addgroup -g 1000 picoclaw && \
 # Switch to non-root user
 USER picoclaw
 
-ENTRYPOINT ["/usr/local/bin/picoclaw-web", "-public"]
+ENTRYPOINT ["/usr/local/bin/picoclaw-web", "-public", "-port", "18800"]
