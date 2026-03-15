@@ -11,9 +11,9 @@ WORKDIR /src
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy source and build
+# Copy source and build web launcher (includes frontend)
 COPY . .
-RUN make build
+RUN make build-launcher
 
 # ============================================================
 # Stage 2: Minimal runtime image
@@ -24,10 +24,10 @@ RUN apk add --no-cache ca-certificates tzdata curl
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget -q --spider http://localhost:18790/health || exit 1
+  CMD wget -q --spider http://localhost:18800/health || exit 1
 
-# Copy binary and config
-COPY --from=builder /src/build/picoclaw /usr/local/bin/picoclaw
+# Copy binary (web launcher) and config
+COPY --from=builder /src/build/picoclaw-launcher /usr/local/bin/picoclaw-web
 COPY --from=builder /src/config.json /tmp/config.json
 
 # Create non-root user and group
@@ -41,5 +41,4 @@ RUN addgroup -g 1000 picoclaw && \
 # Switch to non-root user
 USER picoclaw
 
-ENTRYPOINT ["picoclaw"]
-CMD ["gateway"]
+ENTRYPOINT ["/usr/local/bin/picoclaw-web", "-public"]

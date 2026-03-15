@@ -19,4 +19,4 @@ services:
       - key: GEMINI_API_KEY
         sync: false
     healthCheckPath: /health
-    healthCheckPort: 18790
+    healthCheckPort: 18800
