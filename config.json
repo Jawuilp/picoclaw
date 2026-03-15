@@ -8,6 +8,7 @@
     {
       "model_name": "openrouter-free",
       "model": "openrouter/free",
+      "api_key": "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",
       "api_base": "https://openrouter.ai/api/v1"
     }
   ],
